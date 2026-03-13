@@ -7,4 +7,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="CalendarManagementBusinessL\**" />
+    <Compile Remove="CalendarManagementDataL\**" />
+    <Compile Remove="CalendarManagementModel\**" />
+    <EmbeddedResource Remove="CalendarManagementBusinessL\**" />
+    <EmbeddedResource Remove="CalendarManagementDataL\**" />
+    <EmbeddedResource Remove="CalendarManagementModel\**" />
+    <None Remove="CalendarManagementBusinessL\**" />
+    <None Remove="CalendarManagementDataL\**" />
+    <None Remove="CalendarManagementModel\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="CalendarManagementBusinessL\CalendarManagementBusinessL.csproj" />
+    <ProjectReference Include="CalendarManagementModel\CalendarManagementModel.csproj" />
+  </ItemGroup>
+
 </Project>

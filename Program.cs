@@ -1,82 +1,53 @@
 ﻿using System;
+using CalendarManagementModels;         // Reference the Model Layer
+using CalendarManagementBusinessL;     // Reference the Business Logic Layer
 
-namespace manucalendar
+namespace CalendarManagementUI
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            string[] eventNames = new string[100];
-            DateTime[] startTimes = new DateTime[100];
-            DateTime[] endTimes = new DateTime[100];
-            int eventCount = 0;
+            BL bl = new BL();
 
-            string choice = "";
+            Console.WriteLine("=== Calendar Management: Add Event ===");
 
-            do
+            Console.Write("Enter Event Name: ");
+            string name = Console.ReadLine() ?? "";
+
+            Console.Write("Enter Event Date (YYYY-MM-DD): ");
+            string inputDate = Console.ReadLine() ?? "";
+
+            DateTime eventDate;
+            if (!DateTime.TryParse(inputDate, out eventDate))
             {
-                Console.WriteLine("\nCALENDAR MENU");
-                Console.WriteLine("1. Add Event");
-                Console.WriteLine("2. View Events");
-                Console.WriteLine("3. Exit");
-                Console.Write(" Choose: ");
-                choice = Console.ReadLine();
+                Console.WriteLine("Invalid date format!");
+                return;
+            }
 
-                switch (choice)
-                {
-                    case "1":
-                        AddEvent();
-                        break;
-
-                    case "2":
-                        ViewEvents();
-                        break;
-
-                    case "3":
-                        Console.WriteLine("Exiting...");
-                        break;
-
-                    default:
-                        Console.WriteLine("Invalid choice.");
-                        break;
-                }
-            } while (choice != "3");
-
-       
-            void AddEvent()
+            CalendarEvent newEvent = new CalendarEvent
             {
-                if (eventCount >= 100)
-                {
-                    Console.WriteLine("Event list is full.");
-                    return;
-                }
+                EventId = Guid.NewGuid(),
+                EventName = name,
+                EventDate = eventDate
+            };
 
-                Console.Write("Event Name: ");
-                string name = Console.ReadLine();
+            bool added = bl.AddEvent(newEvent);
 
-                Console.Write("Start Time (yyyy-MM-dd HH:mm): ");
-                if (!DateTime.TryParse(Console.ReadLine(), out DateTime start))
-                {
-                    Console.WriteLine("Invalid date format.");
-                    return;
-                }
+            if (added)
+            {
+                Console.WriteLine("Event added successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Date already has an event! Cannot add.");
+            }
 
-                Console.Write("End Time (yyyy-MM-dd HH:mm): ");
-                if (!DateTime.TryParse(Console.ReadLine(), out DateTime end))
-                {
-                    Console.WriteLine("Invalid date format.");
-                    return;
-                }
-
-                if (end <= start)
-                {
-                    Console.WriteLine("Invalid time. End must be after start.");
-                    return;
-                }
-
-            
-              
-                }
+            Console.WriteLine("\n=== Current Events ===");
+            foreach (var e in bl.dataLayer.dummyEvents)
+            {
+                Console.WriteLine($"{e.EventDate:yyyy-MM-dd} - {e.EventName}");
             }
         }
     }
+}

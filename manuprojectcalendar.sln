@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarManagementModel", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarManagementDataL", "CalendarManagementDataL\CalendarManagementDataL.csproj", "{DBC8D03B-57AC-4017-2109-88F021DDE119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarManagementBusinessL", "..\CalendarManagementBusinessL\CalendarManagementBusinessL.csproj", "{55121B8A-D2F7-419B-82DA-5D466AC0160E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarManagementBusinessL", "CalendarManagementBusinessL\CalendarManagementBusinessL.csproj", "{E4BB3413-975B-4E6B-5587-A799F1FA5ACA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{DBC8D03B-57AC-4017-2109-88F021DDE119}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBC8D03B-57AC-4017-2109-88F021DDE119}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBC8D03B-57AC-4017-2109-88F021DDE119}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55121B8A-D2F7-419B-82DA-5D466AC0160E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55121B8A-D2F7-419B-82DA-5D466AC0160E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55121B8A-D2F7-419B-82DA-5D466AC0160E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55121B8A-D2F7-419B-82DA-5D466AC0160E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4BB3413-975B-4E6B-5587-A799F1FA5ACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4BB3413-975B-4E6B-5587-A799F1FA5ACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4BB3413-975B-4E6B-5587-A799F1FA5ACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4BB3413-975B-4E6B-5587-A799F1FA5ACA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

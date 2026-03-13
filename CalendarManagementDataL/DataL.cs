@@ -14,9 +14,7 @@ namespace CalendarManagementDataL
         {
             CalendarEvent birthday = new CalendarEvent
             {
-                EventId = Guid.NewGuid(),
-                EventName = "Birthday Party",
-                EventDate = new DateTime(2026, 3, 20)
+               
             };
 
             dummyEvents.Add(birthday);
