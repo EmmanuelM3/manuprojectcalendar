@@ -19,7 +19,7 @@ namespace manucalendar
                 Console.WriteLine("1. Add Event");
                 Console.WriteLine("2. View Events");
                 Console.WriteLine("3. Exit");
-                Console.Write("Choose: ");
+                Console.Write(" Choose: ");
                 choice = Console.ReadLine();
 
                 switch (choice)
