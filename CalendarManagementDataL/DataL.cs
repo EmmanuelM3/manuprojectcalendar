@@ -6,24 +6,22 @@ namespace CalendarManagementDataL
 {
     public class DataL
     {
-        
-        public List<CalendarEvent> dummyEvents = new List<CalendarEvent>();
+
+        public List<CalendarEvent> events;
+
 
 
         public DataL()
         {
-            CalendarEvent birthday = new CalendarEvent
-            {
-               
-            };
-
-            dummyEvents.Add(birthday);
+            events = new List<CalendarEvent>();
         }
 
   
         public void Add(CalendarEvent calendarEvent)
         {
-            dummyEvents.Add(calendarEvent);
+            events.Add(calendarEvent);
         }
+
+     
     }
 }

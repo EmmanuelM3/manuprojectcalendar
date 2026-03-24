@@ -9,45 +9,65 @@ namespace CalendarManagementUI
         static void Main(string[] args)
         {
             BL bl = new BL();
+            bool running = true;
 
-            Console.WriteLine("=== Calendar Management: Add Event ===");
-
-            Console.Write("Enter Event Name: ");
-            string name = Console.ReadLine() ?? "";
-
-            Console.Write("Enter Event Date (YYYY-MM-DD): ");
-            string inputDate = Console.ReadLine() ?? "";
-
-            DateTime eventDate;
-            if (!DateTime.TryParse(inputDate, out eventDate))
+            do
             {
-                Console.WriteLine("Invalid date format!");
-                return;
-            }
+                Console.WriteLine("\n Calendar Management System ");
+                Console.WriteLine("1. Add Event");
+                Console.WriteLine("2. Exit");
+                string choice = Console.ReadLine(); 
 
-            CalendarEvent newEvent = new CalendarEvent
-            {
-                EventId = Guid.NewGuid(),
-                EventName = name,
-                EventDate = eventDate
-            };
+                switch(choice) {
+                    case "1":
+                        Console.Write("Enter Event Name: ");
+                        string name = Console.ReadLine() ?? "";
 
-            bool added = bl.AddEvent(newEvent);
+                        Console.Write("Enter Event Date (YYYY-MM-DD): ");
+                        string inputDate = Console.ReadLine() ?? "";
 
-            if (added)
-            {
-                Console.WriteLine("Event added successfully!");
-            }
-            else
-            {
-                Console.WriteLine("Date already has an event! Cannot add.");
-            }
+                        DateTime eventDate;
+                        if (!DateTime.TryParse(inputDate, out eventDate))
+                        {
+                            Console.WriteLine("Invalid date format!");
+                            break;
+                        }
 
-            Console.WriteLine("\n=== Current Events ===");
-            foreach (var e in bl.dataLayer.dummyEvents)
-            {
-                Console.WriteLine($"{e.EventDate:yyyy-MM-dd} - {e.EventName}");
-            }
+                        CalendarEvent newEvent = new CalendarEvent
+                        {
+                            EventName = name,
+                            EventDate = eventDate
+                        };
+
+                        bool added = bl.AddEvent(newEvent);
+
+                        if (added)
+                        {
+                            Console.WriteLine("Event added successfully!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Date already has an event! Cannot add.");
+                        }
+
+                        Console.WriteLine("\n=== Current Events ===");
+                        foreach (var e in bl.dataLayer.events)
+                        {
+                            Console.WriteLine($"{e.EventDate:yyyy-MM-dd} - {e.EventName}");
+                        }
+
+                        break;
+
+                    case "2":
+                        running = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        break;
+                }
+
+            } while (running);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace CalendarManagementModels
 {
     public class CalendarEvent
     {
-        public Guid EventId { get; set; }
         public string EventName { get; set; }
         public DateTime EventDate { get; set; }
     }

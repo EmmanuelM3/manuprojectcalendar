@@ -4,9 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
-
-
 namespace CalendarManagementBusinessL
 {
     public class BL
@@ -15,8 +12,10 @@ namespace CalendarManagementBusinessL
 
         public bool AddEvent(CalendarEvent newEvent)
         {
-            if (dataLayer.dummyEvents.Exists(e => e.EventDate.Date == newEvent.EventDate.Date))
+            if (dataLayer.events.Exists(e => e.EventDate.Date == newEvent.EventDate.Date))
                 return false;
+
+
 
             dataLayer.Add(newEvent);
             return true;
