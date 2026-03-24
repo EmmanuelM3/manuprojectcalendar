@@ -1,6 +1,6 @@
 ﻿using System;
-using CalendarManagementModels;         // Reference the Model Layer
-using CalendarManagementBusinessL;     // Reference the Business Logic Layer
+using CalendarManagementModels;       
+using CalendarManagementBusinessL;    
 
 namespace CalendarManagementUI
 {
