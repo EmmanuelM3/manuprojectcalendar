@@ -20,5 +20,31 @@ namespace CalendarManagementBusinessL
             dataLayer.Add(newEvent);
             return true;
         }
+
+        public List<CalendarEvent> GetEvents()
+        {
+            return dataLayer.events;
+        }
+
+        public bool UpdateEvent(DateTime oldDate, string newName,  DateTime newDate)
+        {
+            var existing = dataLayer.events.FirstOrDefault(e => e.EventDate.Date == oldDate.Date);
+
+            if (existing == null)
+                return false;
+
+            if (dataLayer.events.Exists(e => e.EventDate.Date == newDate.Date && e != existing))
+                return false;
+
+            existing.EventName = newName;
+            existing.EventDate = newDate;
+
+            return true;
+        }
+
+        public bool RemoveEvent(DateTime date)
+        {
+            return dataLayer.DeleteEvent(date);
+        }
     }
 }

@@ -22,6 +22,16 @@ namespace CalendarManagementDataL
             events.Add(calendarEvent);
         }
 
+        public bool DeleteEvent(DateTime date)
+        {
+            var existing = events.FirstOrDefault(e => e.EventDate.Date == date.Date);
+            if (existing != null)
+            {
+                events.Remove(existing);
+                return true;
+            }
+            return false;
+        }
      
     }
 }
