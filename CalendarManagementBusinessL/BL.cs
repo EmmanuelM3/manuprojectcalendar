@@ -1,4 +1,5 @@
 ﻿using CalendarManagementDataL;
+using CalendarManagementDataLayer;
 using CalendarManagementModels;
 using System;
 using System.Collections.Generic;
@@ -8,43 +9,53 @@ namespace CalendarManagementBusinessL
 {
     public class BL
     {
-        public DataL dataLayer = new DataL();
+        private readonly CalendarDataService _eventService;
+
+        public BL()
+        {
+            _eventService = new CalendarDataService(new CalendarDatabase());
+        }
 
         public bool AddEvent(CalendarEvent newEvent)
         {
-            if (dataLayer.events.Exists(e => e.EventDate.Date == newEvent.EventDate.Date))
+            if (_eventService.FindByDate(newEvent.EventDate) != null)
+            {
                 return false;
+            }
 
-
-
-            dataLayer.Add(newEvent);
+            _eventService.SaveEvent(newEvent);
             return true;
         }
 
         public List<CalendarEvent> GetEvents()
         {
-            return dataLayer.events;
+            return _eventService.FetchAll();
         }
 
         public bool UpdateEvent(DateTime oldDate, string newName,  DateTime newDate)
         {
-            var existing = dataLayer.events.FirstOrDefault(e => e.EventDate.Date == oldDate.Date);
+            var existing = _eventService.FindByDate(oldDate);
 
             if (existing == null)
+            {
                 return false;
-
-            if (dataLayer.events.Exists(e => e.EventDate.Date == newDate.Date && e != existing))
+            }
+            var conflict = _eventService.FindByDate(newDate);
+            if (conflict != null && conflict != existing)
+            {
                 return false;
+            }
 
             existing.EventName = newName;
             existing.EventDate = newDate;
 
+            _eventService.UpdateExisting(oldDate, existing);
             return true;
         }
 
         public bool RemoveEvent(DateTime date)
         {
-            return dataLayer.DeleteEvent(date);
+            return _eventService.RemoveByDate(date);
         }
     }
 }
