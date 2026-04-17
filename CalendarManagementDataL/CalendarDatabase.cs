@@ -9,7 +9,7 @@ namespace CalendarManagementDataLayer
 {
     public class CalendarDatabase : InterfaceEventData
     {
-        private string _cs = @"Data Source=LAPTOP-O72KAUC7\SQLEXPRESS; Initial Catalog=Calendar_db; Integrated Security=True; TrustServerCertificate=True;";
+        private string _cs = @"Data Source=Milo\SQLEXPRESS; Initial Catalog=Calendar_db; Integrated Security=True; TrustServerCertificate=True;";
         private SqlConnection _conn;
 
         public CalendarDatabase()
