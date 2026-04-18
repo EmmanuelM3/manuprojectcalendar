@@ -74,36 +74,49 @@ namespace CalendarManagementUI
                         }
                         Console.ReadKey();
                         break;
+
                     case "3":
-                        Console.WriteLine("Enter the Date of the event you want to change in this format(YYYY-MM-DD): ");
+                        Console.WriteLine("\n--- Update Event ---");
+                        Console.Write("Enter the Date of the event you want to change (YYYY-MM-DD): ");
                         string oldDateInput = Console.ReadLine() ?? "";
 
                         DateTime oldDate;
                         if (!DateTime.TryParse(oldDateInput, out oldDate))
                         {
-                            Console.WriteLine("Invalid date format!");
+                            Console.WriteLine("Error: Invalid date format!");
                             Console.ReadKey();
                             break;
                         }
-                  
+
                         Console.Write("Enter new Event Name: ");
-                        string newName = Console.ReadLine();
+                        string newName = Console.ReadLine() ?? "";
 
                         Console.Write("Enter new Event Date (YYYY-MM-DD): ");
-                        string newDateInput = Console.ReadLine();
+                        string newDateInput = Console.ReadLine() ?? "";
 
                         DateTime newDate;
                         if (!DateTime.TryParse(newDateInput, out newDate))
                         {
-                            Console.WriteLine("Invalid date format!");
+                            Console.WriteLine("Error: Invalid date format!");
+                            Console.ReadKey(); 
                             break;
                         }
-                        bool updated = bl.UpdateEvent(oldDate, newName, newDate);
-                        if (updated)
-                            Console.WriteLine("Event Updated Sucessfully");
-                        else
-                            Console.WriteLine("Update Failed! Either event not found or new date conflicts with another event");
 
+
+                        bool updated = bl.UpdateEvent(oldDate, newName, newDate);
+
+                        if (updated)
+                        {
+                            Console.WriteLine("\nSuccess: Event Updated Successfully!");
+                        }
+                        else
+                        {
+
+                            Console.WriteLine("\nUpdate Failed! Either the event wasn't found or the new date is already taken.");
+                        }
+
+                        Console.WriteLine("Press any key to return to the menu...");
+                        Console.ReadKey();
                         break;
                     case "4":
                         Console.WriteLine("Enter the Date of the Event to Delete: (YYYY-MM-DD): ");

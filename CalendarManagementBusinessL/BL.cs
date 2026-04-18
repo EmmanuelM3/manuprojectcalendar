@@ -32,18 +32,18 @@ namespace CalendarManagementBusinessL
             return _eventService.FetchAll();
         }
 
-        public bool UpdateEvent(DateTime oldDate, string newName,  DateTime newDate)
+        public bool UpdateEvent(DateTime oldDate, string newName, DateTime newDate)
         {
             var existing = _eventService.FindByDate(oldDate);
+            if (existing == null) return false;
 
-            if (existing == null)
+            if (oldDate.Date != newDate.Date)
             {
-                return false;
-            }
-            var conflict = _eventService.FindByDate(newDate);
-            if (conflict != null && conflict != existing)
-            {
-                return false;
+                var conflict = _eventService.FindByDate(newDate);
+                if (conflict != null)
+                {
+                    return false;
+                }
             }
 
             existing.EventName = newName;
