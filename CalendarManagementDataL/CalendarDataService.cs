@@ -37,9 +37,6 @@ namespace CalendarManagementDataL
             _eventData.UpdateEvent(oldDate, updatedEvent);
         }
 
-        public static implicit operator CalendarDataService(CalendarDatabase v)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

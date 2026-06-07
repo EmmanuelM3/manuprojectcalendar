@@ -1,47 +1,46 @@
-﻿using CalendarManagementDataL;
-using CalendarManagementDataLayer;
-using CalendarManagementModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿    using CalendarManagementDataL;
+    using CalendarManagementDataLayer;
+    using CalendarManagementModels;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-namespace CalendarManagementBusinessL
-{
-    public class BL
+    namespace CalendarManagementBusinessL
     {
-        private readonly CalendarDataService _eventService;
-
-        public BL()
+        public class BL
         {
-            _eventService = new CalendarDataService(new CalendarDatabase());
-        }
+            private readonly CalendarDataService _eventService = new CalendarDataService(new CalendarDatabase());
+            // private readonly CalendarDataService _eventService = new CalendarDataService(new CalendarEventJson());
+            // private readonly CalendarDataService _eventService = new CalendarDataService(new EventInMemoryData());
 
-        public bool AddEvent(CalendarEvent newEvent)
-        {
-            if (_eventService.FindByDate(newEvent.EventDate) != null)
+
+            public bool AddEvent(CalendarEvent newEvent)
             {
-                return false;
+                if (_eventService.FindByDate(newEvent.EventDate) != null)
+                {
+                    return false;
+                }
+
+                _eventService.SaveEvent(newEvent);
+                return true;
             }
 
-            _eventService.SaveEvent(newEvent);
-            return true;
-        }
+            public List<CalendarEvent> GetEvents()
+            {
+                return _eventService.FetchAll();
+            }
 
-        public List<CalendarEvent> GetEvents()
-        {
-            return _eventService.FetchAll();
-        }
-
-        public bool UpdateEvent(DateTime oldDate, string newName,  DateTime newDate)
+        public bool UpdateEvent(DateTime oldDate, string newName, DateTime newDate)
         {
             var existing = _eventService.FindByDate(oldDate);
-
             if (existing == null)
             {
                 return false;
             }
+
             var conflict = _eventService.FindByDate(newDate);
-            if (conflict != null && conflict != existing)
+
+            if (conflict != null && oldDate != newDate)
             {
                 return false;
             }
@@ -54,8 +53,8 @@ namespace CalendarManagementBusinessL
         }
 
         public bool RemoveEvent(DateTime date)
-        {
-            return _eventService.RemoveByDate(date);
+            {
+                return _eventService.RemoveByDate(date);
+            }
         }
     }
-}
